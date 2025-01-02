@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Pemesanan</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        background: url(Gambar/backgroundLogin.jpg);
+        background-size: cover;
+        backdrop-filter: blur(10px);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        color: white;
+      }
+      .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      h2 {
+        text-align: center;
+        color: white;
+        filter: drop-shadow(1px 1px 20px white);
+        margin-bottom: 20px;
+      }
+      .form-container,
+      .card {
+        box-shadow: 1px 1px 20px yellow;
+        padding: 20px;
+        border-radius: 10px;
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+        margin-bottom: 20px;
+      }
+      label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        display: block;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      input:focus,
+      select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .table th,
+      .table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .table th {
+        background-color: #007bff;
+        color: white;
+        font-weight: 600;
+      }
+      .table tr:nth-child(even) {
+        background-color: #f4f4f4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Form Pemesanan -->
+      <div class="form-container">
+        <h2>FORM PEMESANAN</h2>
+        <form id="formPemesanan">
+          <label for="idPemesan">Id Pemesan:</label>
+          <input type="text" id="idPemesan" name="idPemesan" disabled value="1" />
+
+          <label for="namaPemesan">Nama Pemesan:</label>
+          <input type="text" id="namaPemesan" name="namaPemesan" required />
+
+          <label for="jenisKelamin">Jenis Kelamin:</label>
+          <select id="jenisKelamin" style="width: 50%" required>
+            <option value="">- Pilih -</option>
+            <option value="Laki-Laki">Laki-Laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+
+          <label for="nomorIdentitas">Nomor Identitas:</label>
+          <input type="text" id="nomorIdentitas" name="nomorIdentitas" required />
+
+          <label for="tipeKamar">Tipe Kamar:</label>
+          <select id="tipeKamar" name="tipeKamar" style="width: 50%" required>
+            <option value="">- Pilih -</option>
+            <option value="Standar">Standar</option>
+            <option value="Deluxe">Deluxe</option>
+            <option value="Family">Family</option>
+          </select>
+
+          <label for="harga">Harga:</label>
+          <input type="number" id="harga" readonly />
+
+          <label for="tanggalPesan">Tanggal Pesan:</label>
+          <input type="date" id="tanggalPesan" style="width: 50%" required />
+
+          <label for="durasiMenginap">Durasi Menginap:</label>
+          <input type="number" id="durasiMenginap" style="width: 50%" required /> Hari
+
+          <label for="breakfast">Termasuk Breakfast:</label>
+          <input type="checkbox" id="breakfast" style="width: 50%" />
+
+          <label for="totalBayar">Total Bayar:</label>
+          <input type="text" id="totalBayar" readonly />
+
+          <div class="buttons">
+            <button type="button" id="simpanButton">Simpan</button>
+            <button type="reset" id="cancelButton">Batal</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Data Pemesanan -->
+      <div id="dataPemesanan">
+        <div>
+          <div>
+            <h2>Melihat Data Pemesanan Konsumen</h2>
+          </div>
+          <div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Id Pemesan</th>
+                  <th scope="col">Nama Pemesan</th>
+                  <th scope="col">Jenis Kelamin</th>
+                  <th scope="col">Nomor Identitas</th>
+                  <th scope="col">Tipe Kamar</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Tanggal Pesan</th>
+                  <th scope="col">Durasi Menginap</th>
+                  <th scope="col">Termasuk Breakfast</th>
+                  <th scope="col">Total Bayar</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody">
+                <!-- Data pemesanan akan ditambahkan di sini secara dinamis -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        const hargaKamar = {
+          Standar: 300000,
+          Deluxe: 500000,
+          Family: 800000,
+        };
+
+        $("#tipeKamar").change(function () {
+          const tipe = $(this).val();
+          $("#harga").val(hargaKamar[tipe] || 0);
+        });
+
+        const dataPemesanan = [
+          {
+            id: 1,
+            nama: "Refhan Fazri Handianto",
+            gender: "Laki - Laki",
+            identitas: "1234567887654321",
+            tipeKamar: "Deluxe",
+            harga: 500000,
+            tanggalPesan: "2024-12-31",
+            durasi: 2,
+            breakfast: true,
+            totalBayar: 1080000,
+          },
+        ];
+
+        function displayData(data) {
+          const tableBody = $("#tableBody");
+          tableBody.empty();
+          data.forEach((item) => {
+            const row = `<tr>
+            <th scope="row">${item.id}</th>
+            <td>${item.nama}</td>
+            <td>${item.gender}</td>
+            <td>${item.identitas}</td>
+            <td>${item.tipeKamar}</td>
+            <td>${item.harga.toLocaleString()}</td>
+            <td>${item.tanggalPesan}</td>
+            <td>${item.durasi} Hari</td>
+            <td>${item.breakfast ? "Ya" : "Tidak"}</td>
+            <td>${item.totalBayar.toLocaleString()}</td>
+          </tr>`;
+            tableBody.append(row);
+          });
+        }
+
+        displayData(dataPemesanan);
+
+        $("#simpanButton").click(function () {
+          const newData = {
+            id: dataPemesanan.length + 1,
+            nama: $("#namaPemesan").val(),
+            gender: $("#jenisKelamin").val(),
+            identitas: $("#nomorIdentitas").val(),
+            tipeKamar: $("#tipeKamar").val(),
+            harga: parseInt($("#harga").val()) || 0,
+            tanggalPesan: $("#tanggalPesan").val(),
+            durasi: parseInt($("#durasiMenginap").val()) || 0,
+            breakfast: $("#breakfast").is(":checked"),
+          };
+
+          let total = newData.harga * newData.durasi;
+          if (newData.durasi > 3) total *= 0.9;
+          if (newData.breakfast) total += 80000;
+          newData.totalBayar = total;
+
+          dataPemesanan.push(newData);
+          displayData(dataPemesanan);
+
+          $("#formPemesanan")[0].reset();
+          $("#idPemesan").val(newData.id + 1);
+          $("#harga").val("");
+        });
+      });
+    </script>
+  </body>
+</html>

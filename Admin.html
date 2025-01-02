@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar-utama">
+      <nav class="navbar">
+        <a class="navbar-brand" href="#">
+          <img src="Gambar/logoHotel.png" />
+          <div class="div1">
+            <h1>BEST HOTEL</h1>
+            <!-- <img src="Gambar/hotel.jpeg" width="300" height="50" /> -->
+          </div>
+        </a>
+      </nav>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="#jenisKamar" style="color: white">Jenis Kamar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#fasilitasHotel" style="color: white">Fasilitas Hotel</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#dataPemesanan" style="color: white">Data Pemesanan</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="jenisKamar" class="container mt-5">
+      <!-- Mengelola Jenis Kamar -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2 class="h4">Mengelola Jenis Kamar</h2>
+        </div>
+        <div class="card-body">
+          <form id="roomForm">
+            <div class="mb-3">
+              <label for="roomType" class="form-label">Jenis Kamar</label>
+              <input type="text" class="form-control" id="roomType" placeholder="Masukkan jenis kamar" />
+            </div>
+            <div class="mb-3">
+              <label for="roomPrice" class="form-label">Harga Kamar</label>
+              <input type="number" class="form-control" id="roomPrice" placeholder="Masukkan harga kamar" />
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <!-- Mengelola Fasilitas Hotel -->
+      <div id="fasilitasHotel" class="card mb-4">
+        <div class="card-header">
+          <h2 class="h4">Mengelola Fasilitas Hotel</h2>
+        </div>
+        <div class="card-body">
+          <form id="facilityForm">
+            <div class="mb-3">
+              <label for="facilityName" class="form-label">Nama Fasilitas</label>
+              <input type="text" class="form-control" id="facilityName" placeholder="Masukkan nama fasilitas" />
+            </div>
+            <div class="mb-3">
+              <label for="facilityDescription" class="form-label">Deskripsi Fasilitas</label>
+              <textarea class="form-control" id="facilityDescription" rows="3" placeholder="Masukkan deskripsi fasilitas"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="dataPemesanan" class="container-sm mt-5">
+      <!-- Melihat Data Pemesanan Konsumen -->
+      <div class="card mb-4" style="margin-top: 10px">
+        <div class="card-header">
+          <h2 class="h4">Melihat Data Pemesanan Konsumen</h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id Pemesan</th>
+                <th scope="col">Nama Pemesan</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Nomor Identitas</th>
+                <th scope="col">Tipe Kamar</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Tanggal Pesan</th>
+                <th scope="col">Durasi Menginap</th>
+                <th scope="col">Termasuk Breakfast</th>
+                <th scope="col">Total Bayar</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Data pemesanan akan ditambahkan di sini -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      document.getElementById("roomForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const roomType = document.getElementById("roomType").value;
+        const roomPrice = document.getElementById("roomPrice").value;
+        console.log("Jenis Kamar:", roomType);
+        console.log("Harga Kamar:", roomPrice);
+        alert(`Jenis Kamar: ${roomType}, Harga Kamar: ${roomPrice}`);
+      });
+
+      document.getElementById("facilityForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const facilityName = document.getElementById("facilityName").value;
+        const facilityDescription = document.getElementById("facilityDescription").value;
+        console.log("Nama Fasilitas:", facilityName);
+        console.log("Deskripsi Fasilitas:", facilityDescription);
+        alert(`Nama Fasilitas: ${facilityName}, Deskripsi Fasilitas: ${facilityDescription}`);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  background: url(../Gambar/backgroundLogin.jpg);
+  background-size: cover;
+  backdrop-filter: blur(10px);
+}
+nav.navbar-utama {
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+}
+nav.navbar {
+  background: url(../Gambar/BackgroundNavbar.jpg);
+  background-size: 100% 100%;
+}
+img {
+  box-shadow: 1px 1px 20px yellow;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+}
+nav ul.nav {
+  background-color: darkblue;
+}
+a.navbar-brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 15px;
+}
+.div1 {
+  margin-left: 15px;
+  display: flex;
+  gap: 635px;
+  text-align: center;
+}
+h1 {
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+}
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.table th {
+  background-color: #007bff;
+  color: white;
+}

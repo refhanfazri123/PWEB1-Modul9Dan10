@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Login</title>
+    <style>
+      body {
+        background: url(Gambar/backgroundLogin.jpg);
+        background-size: cover;
+        backdrop-filter: blur(10px);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .login-container {
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 20px yellow;
+        width: 300px;
+      }
+      .login-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: white;
+      }
+      .login-container label {
+        color: white;
+      }
+      .login-container input[type="text"],
+      .login-container input[type="password"] {
+        width: 93%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      .login-container input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 25px;
+      }
+      .login-container input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>FORM LOGIN</h2>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required />
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+
+    <script>
+      document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Contoh sederhana validasi username dan password
+        if (username === "admin" && password === "admin02") {
+          // Redirect ke halaman admin
+          window.location.href = "admin.html";
+        } else {
+          alert("Username atau password salah");
+        }
+      });
+    </script>
+  </body>
+</html>
